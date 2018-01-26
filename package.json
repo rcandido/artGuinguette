@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
@@ -13,20 +13,23 @@
     "@babel/core": "^7.0.0-beta.35",
     "@babel/preset-env": "^7.0.0-beta.35",
     "angular": "^1.6.7",
+    "angular-animate": "^1.6.8",
+    "angular-route": "^1.6.8",
+    "angular-ui-bootstrap": "^2.5.6",
     "babel-loader": "^8.0.0-beta.0",
     "babel-plugin-angularjs-annotate": "^0.8.2",
     "css-loader": "^0.28.7",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.2",
+    "gsap": "^1.20.3",
+    "jquery": "^3.1.1",
+    "lodash": "^4.17.4",
+    "ng-animated-scroll": "^1.5.0",
     "node-sass": "^4.7.2",
-		"jquery": "^3.1.1",
     "sass-loader": "^6.0.6",
     "serve-index": "^1.9.1",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.1"
-  },
-  "scripts": {
-    "build": "webpack"
   }
 }

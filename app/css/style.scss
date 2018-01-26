@@ -1,5 +1,343 @@
 $color: rgb(202, 206, 206);
-body {
-    background-color: $color;
-    
+$colorA:  #106b6b;
+$maxWidht:950px;
+$maxHeight:650px;
+$maxMobileHeight:400px;
+.contact table {
+    width: 500px;
+    margin: auto;
 }
+
+.evenement table {
+    width: 100%;
+    max-width: 940px;
+   
+    text-align: center;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+.evenement td {
+    text-align: center;
+    margin: 10 auto;
+}
+.evenement.jour {
+    text-align: left;
+    margin: 10 auto;
+}
+
+
+.evenement.dates {
+    text-align: left;
+    color: brown;
+    margin: 10 auto;
+}
+
+.not-visible {
+    visibility: hidden;
+  }
+
+.container {
+    /*background-co lor: #6699ff;*/
+    color: #eee;
+}
+
+.accueil-container {
+    border: 1px solid #999;
+    margin:10px;
+    padding: 12px;
+    border-radius: 5px;
+}
+.accueil-container a:nth-child(even)  {
+ color: #3f4646;
+}
+.accueil-container a:nth-child(odd)  {
+  color: $colorA;
+ }
+
+.accueil-container:nth-child(even) {
+    background-color: #454747;
+}
+.accueil-container:nth-child(odd) {
+    background-color: #bac0c5;
+}
+
+.accueil h3 {
+    color: white;
+}
+
+
+.spacer {
+    height: 200px;
+}
+
+.row {
+    width: 100%;
+    max-width: 940px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 2%;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    color: #8f8f8f;
+    background: white;
+    font-family: "Cardo", serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  a {
+    text-decoration: none;
+    color: $colorA;
+  }
+  
+  h1 {
+    font-size: 30px;
+    line-height: 1.8;
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  p {
+    margin-bottom: 20px;
+    font-size: 17px;
+    line-height: 2;
+  }
+  
+  .content {
+    padding: 50px 2% 250px;
+  }
+  
+  .hero {
+    position: relative;
+    background: url(/app/img/menu.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+    padding-top: 0px;
+    min-height: 250px;
+    letter-spacing: 2px;
+    font-family: "Montserrat", sans-serif;
+    max-width: 1000px;
+    margin: auto
+  }
+  .hero h1 {
+    font-size: 50px;
+    line-height: 1.3;
+  }
+  .hero h1 span {
+    font-size: 25px;
+    color: #e8f380;
+    border-bottom: 2px solid #e8f380;
+    padding-bottom: 12px;
+    line-height: 3;
+  }
+  
+  .mouse {
+    display: block;
+    margin: 0 auto;
+    width: 26px;
+    height: 46px;
+    border-radius: 13px;
+    border: 2px solid #e8f380;
+    position: absolute;
+    bottom: 40px;
+    position: absolute;
+    left: 50%;
+    margin-left: -26px;
+  }
+  .mouse span {
+    display: block;
+    margin: 6px auto;
+    width: 2px;
+    height: 2px;
+    border-radius: 4px;
+    background: #e8f380;
+    border: 1px solid transparent;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: scroll;
+    animation-name: scroll;
+  }
+  
+  @-webkit-keyframes scroll {
+    0% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  
+    100% {
+      opacity: 0;
+      -webkit-transform: translateY(20px);
+      transform: translateY(20px);
+    }
+  }
+  @keyframes scroll {
+    0% {
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+      transform: translateY(0);
+    }
+  
+    100% {
+      opacity: 0;
+      -webkit-transform: translateY(20px);
+      -ms-transform: translateY(20px);
+      transform: translateY(20px);
+    }
+  }
+  
+  
+  body {
+    background-color: black
+  }
+  .body {
+    overflow: hidden;
+    background-color: black
+  }
+  .container {
+      margin-right: auto; 
+      margin-left: auto; 
+  }
+  
+  .slider {
+    height:  $maxHeight; 
+    width: auto; 
+    max-width: $maxWidht; 
+    max-height: $maxHeight;
+    overflow: hidden;
+    position: relative;
+    background: #e6e6e6;
+    border: 0px; /*solid rgb(250, 247, 247);*/
+    margin-top: 20px;
+  }
+  @media only screen and (max-width: 766px) {
+    .slider {
+      width: auto;
+      max-height: $maxMobileHeight;
+    }
+  }
+  
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+  }
+  
+  .arrow {
+    position: absolute;
+    z-index: 1002;
+    display: block;
+    top: 50%;
+    margin-top: -35px;
+    width: 36px;
+    height: 71px;
+    outline: none;
+    cursor: pointer;
+    background: url(/app/assets/img/blank.gif) no-repeat;
+  }
+  
+  .arrow.prev {
+    opacity: 0.2;
+    left: 20px;
+    background-image: url(/app/assets/img/paddle_prev_999.png);
+    transition: 0.2s linear all;
+  }
+  
+  .arrow.next {
+    opacity: 0.2;
+    right: 20px;
+    background-image: url(/app/assets/img/paddle_next_999.png);
+    transition: 0.2s linear all;
+  }
+  
+  .arrow.prev:hover {
+    opacity: 1;
+    background-image: url(/app/assets/img/paddle_prev_fff.png);
+  }
+  
+  .arrow.next:hover {
+    opacity: 1;
+    background-image: url(/app/assets/img/paddle_next_fff.png);
+  }
+  
+  .nav {
+    text-align: center;
+    display: block;
+    position: absolute;
+    z-index: 1002;
+    left: 0;
+    bottom: -4px;
+    right: 0;
+    height: 48px;
+  }
+  
+  .nonDraggableImage{
+    -webkit-user-drag: none;
+  }
+  
+  .nav .wrapper {
+    margin: 0 auto;
+    width: 100%;
+    padding: 1em 0 .8em;
+  }
+  
+  .nav ul {
+    margin: 0;
+    width: 100%;
+  }
+  
+  .nav .dot, .nav .dot span {
+    display: inline-block;
+    zoom: 1;
+  }
+  
+  .dots .dot {
+    position: relative;
+    margin: 0 8px;
+    width: 12px;
+    height: 12px;
+  }
+  
+  .dots .dot span {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 6px;
+    height: 6px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background: #FFF;
+    border: 1px solid transparent;
+    outline: none;
+    cursor: pointer;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: background-color 0.25s, border-color 0.25s;
+    -moz-transition: background-color 0.25s, border-color 0.25s;
+    transition: background-color 0.25s, border-color 0.25s;
+  }
+  
+  .dots .dot span.active {
+    border-color: #FFF;
+    background-color: transparent;
+  }
