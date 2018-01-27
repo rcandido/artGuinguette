@@ -3,8 +3,9 @@ import {
   rempliMoiCa
 } from '../js/filedData';
 import '../services/animationServices.js';
+import '../js/angular-scroll-animate.js';
 
-const appEvt = angular.module('agendaEvenementModule', ['angular-scroll-animate', 'services']);
+const appEvt = angular.module('agendaEvenementModule', ['angular-scroll-animate', 'services', 'ngSanitize']);
 
 appEvt.controller("EvtController", ['$scope', 'AnimationInOut', function ($scope, AnimationInOut) {
   $scope.animObject = AnimationInOut;
@@ -26,8 +27,8 @@ appEvt.controller("EvtController", ['$scope', 'AnimationInOut', function ($scope
   let leMois = moisMonth[agenda[0].date.getMonth()];
 
   $scope.libele = {
-    avant: "Évènements antérieurs",
-    apres: "Évènements postérieurs"
+    avant: `C'est trop tard mais il est encore temps de jeter un oeil`,
+    apres: `A noter sur vos agendas`
   };
   $scope.agendaAnterieur = evtPasse;
   $scope.agendaPosterieur = evtVenir;

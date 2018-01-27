@@ -13,6 +13,6 @@ export var maRoute = function ($routeProvider) {
             controllerAs: '$ctrl'
         })
         .otherwise({
-            redirectTo: '/'
+           // redirectTo: '/'
         });
 }

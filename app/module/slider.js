@@ -7,22 +7,25 @@ const app = angular.module('slider', ['ngAnimate'])
     $rootScope.page='slider';
     $scope.showTopMenu = $location.path() === "/" ? true : false;
     $scope.theTimeout;
+    $scope.defaultTimeToChange = 2000;
+    $scope.defaultTimeToCheck = 500;
+    $scope.currentTimeToChange = $scope.defaultTimeToChange;
     $scope.autosideTimeout = function () {
       $scope.enableAutoCanceled = false;
       //time
-      if ($scope.time < $scope.timeToChange) {
-        $scope.time += 1000;
+      if ($scope.time < $scope.currentTimeToChange) {
+        $scope.time +=  $scope.defaultTimeToCheck;
       } else {
         $scope.nextSlide(true);
         $scope.time = 0;
-        $scope.timeToChange = 4500;
+        $scope.currentTimeToChange = $scope.defaultTimeToChange ;
       }
-      $scope.theTimeout = $timeout($scope.autosideTimeout, 1000);
+      $scope.theTimeout = $timeout($scope.autosideTimeout,  $scope.defaultTimeToCheck);
     };
 
     $scope.stopTimeout = function () {
       $timeout.cancel($scope.theTimeout);
-      alert("Timer Stopped");
+      console.log("Timer Stopped");
     };
 
     $scope.enableAutoSlide = $scope.enableAutoSlide !== undefined ? true : $scope.enableAutoSlide;
@@ -75,23 +78,29 @@ const app = angular.module('slider', ['ngAnimate'])
     }
 
     $scope.setCurrentSlideIndex = function (index) {
+      $scope.currentTimeToChange +=2000; 
       $scope.currentIndex = index;
-      $rootScope.currentIndex = index;
     };
     $scope.isCurrentSlideIndex = function (index) {
       return $scope.currentIndex === index;
     };
-    $scope.prevSlide = function () {
-      $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
-      $rootScope.currentIndex = $scope.currentIndex;
-    };
-    $scope.nextSlide = function (isFromAutoSlide = false) {
+    $scope.prevSlide = function (isFromAutoSlide = false) {
       $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
       $rootScope.currentIndex = $scope.currentIndex;
+      if(!isFromAutoSlide) {
+        $scope.currentTimeToChange +=2000; 
+      }
+    };
+    $scope.nextSlide = function (isFromAutoSlide = false) {
+    
+      $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++ $scope.currentIndex : 0;
+       $rootScope.currentIndex = $scope.currentIndex;
+       if(!isFromAutoSlide) {
+         $scope.currentTimeToChange +=2000; 
+       }
     };
     $scope.goTo = function (url, $index) {
       if ($scope.slides[$index].url != undefined && $scope.slides[$index].url !== '') {
-       // window.open($scope.slides[$index].url);
        $location.path($scope.slides[$index].url)
       }
     };

@@ -1,17 +1,18 @@
 
 <div ng-repeat="evt in currentAgenda  | limitTo: limit" when-visible="animateElementIn" when-not-visible="animateElementOut" class="hidden evt  accueil-container"
     data-effect='rotateInDownRight' data-effect2='rotateInDownLeft'>
-	<link rel="stylesheet" href="../../bower_components/animate.css/animate.css" />
+	
 
 
 	<h3 class="ng-binding">{{evt.affiche.leMoisHTML}} {{evt.affiche.leNumeroDuJourHTML}} {{evt.info.titre}}</h3>
 	<div class="ng-binding">
-		{{evt.info.description}}
+			<a href="{{evt.info.evtFacebook}}" target="_blank">
+	    <span ng-bind-html="evt.info.titre"></span>
+		<span ng-bind-html="evt.info.description"></span>
+	</a>
 	</div>
 	<div class="ng-binding">
-		<a href="{{evt.info.evtFacebook}}" target="_blank">
-			<span class=""> {{evt.info.titre}} </span>
-		</a>
+		
 		<br>
 		<a target="_blank" href="{{evt.info.adresseGoogle}}">
 			{{evt.info.adresse}}</a>

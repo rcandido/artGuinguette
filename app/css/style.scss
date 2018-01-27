@@ -1,4 +1,5 @@
 $color: rgb(202, 206, 206);
+$colorB: #8f8f8f;
 $colorA:  #106b6b;
 $maxWidht:950px;
 $maxHeight:650px;
@@ -49,7 +50,7 @@ $maxMobileHeight:400px;
     border-radius: 5px;
 }
 .accueil-container a:nth-child(even)  {
- color: #3f4646;
+ color: $colorB;
 }
 .accueil-container a:nth-child(odd)  {
   color: $colorA;
@@ -202,11 +203,13 @@ $maxMobileHeight:400px;
   
   
   body {
-    background-color: black
+    background-color: black;
+  
   }
   .body {
     overflow: hidden;
-    background-color: black
+    background-color: black;
+    
   }
   .container {
       margin-right: auto; 
@@ -220,7 +223,6 @@ $maxMobileHeight:400px;
     max-height: $maxHeight;
     overflow: hidden;
     position: relative;
-    background: #e6e6e6;
     border: 0px; /*solid rgb(250, 247, 247);*/
     margin-top: 20px;
   }
