@@ -9,7 +9,7 @@ export var maRoute = function ($routeProvider) {
         })
         .when('/desc/:msg', {
             templateUrl: 'app/layout/tmpl/info.html',
-            controller: 'MessageController',
+            controller: 'InfoControler',
             controllerAs: '$ctrl'
         })
         .otherwise({

@@ -1,6 +1,6 @@
 var services = angular.module('services', []);
 
-services.factory('AnimationInOut', function() {
+services.factory('AnimationInOut', function($window) {
 
   let animationInOut = {};
 
@@ -27,13 +27,17 @@ services.factory('AnimationInOut', function() {
   animationInOut.animateElementIn = function ($el, $scope) {
     let animationType = $el[0].dataset.effect != undefined? $el[0].dataset.effect : animationDefault ;
     let animationType2 =  $el[0].dataset.effect2 != undefined? $el[0].dataset.effect2 : animationType ;
-
+    
     if (animationIn) {
       animationType = animationType2;
       animationInOut.turnInOff();
     } else animationInOut.turnInOn();
-    $el.removeClass('hidden');
-    $el.addClass('animated ' + animationType);
+
+    if(($el.hasClass('not-to-mobile') && $window.outerWidth<600) == false) {
+      $el.removeClass('hidden');
+      $el.addClass('animated ' + animationType)
+    }
+   
   };
 
   animationInOut.animateElementOut = function ($el, $scope) {
@@ -44,9 +48,11 @@ services.factory('AnimationInOut', function() {
       animationType = animationType2;
       animationInOut.turnInOff();
     } 
-    $el.addClass('hidden');
-    $el.removeClass('animated ' + animationType); 
+    if(($el.hasClass('not-to-mobile') && $window.outerWidth<600) == false) {
+      $el.addClass('hidden');
+      $el.removeClass('animated ' + animationType); 
 
+    } 
   }
 
 

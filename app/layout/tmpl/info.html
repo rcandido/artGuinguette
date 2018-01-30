@@ -1,26 +1,71 @@
 <div id="artTop">
-        <a class="logo" href="" ng-click="scrollTo('.art0')"><img src="/app/img/logo.png" width="60" height="60"/></a>
+        <a class="logo" href="" ng-click="scrollTo('.art0')">
+                <img src="/app/img/logo.png" width="60" height="60" />
+        </a>
 </div>
-<br><br><br><br><br>
 
-Mon contenu sera ici avec {{message}} ma page:{{page}}
-<br><br><br><br>
-Mon contenu sera ici avec {{message}}
-<br><br><br><br><br>
-<br><br><br><br><br>
-Mon contenu sera ici avec {{message}}
-<br><br><br><br>
-Mon contenu sera ici avec {{message}}
-<br><br><br><br><br>
-<br><br><br><br><br>
-Mon contenu sera ici avec {{message}}
-<br><br><br><br>
-Mon contenu sera ici avec {{message}}
-<br><br><br><br><br>
-<br><br><br><br><br>
-Mon contenu sera ici avec {{message}}
-<br><br><br><br>
-Mon contenu sera ici avec {{message}}
-<br><br><br><br><br>
+<div class="hero hero-noaccueil ng-class:'hero-img'+message">
+
+
+        <br>
+        <br>
+
+        <div class="quand">
+                <p>QUAND</p>
+        </div>
+
+        <div class="row content info">
+                <br>
+                <br>
+                <div when-visible="animateElementIn" when-not-visible="animateElementOut" data-effect='bounceInLeft'>
+                        {{evt.affiche.leJourHTML}} {{evt.affiche.leNumeroDuJourHTML}} {{evt.affiche.leMoisHTML}} {{evt.affiche.lanneeHTML}}
+                </div>
+        </div>
+        <div when-visible="animateElementIn" when-not-visible="animateElementOut" data-effect='bounceInLeft' class="hidden">
+                <div class="qui">
+                        <p>QUI</p>
+                </div>
+        </div>
+        <div when-visible="animateElementIn" when-not-visible="animateElementOut" data-effect='bounceInRight' class="hidden">
+                <div class="row content info">
+                        <br>
+                        <br>
+                        <div >
+                                <span ng-bind-html="evt.info.qui"></span>
+                        </div>
+                </div>
+        </div>
+        <div when-visible="animateElementIn" when-not-visible="animateElementOut" data-effect='bounceInLeft'  class="hidden">
+                        <div class="ou">
+                                <p>O&Ugrave;</p>
+                        </div>
+                </div>
+                <div when-visible="animateElementIn" when-not-visible="animateElementOut" data-effect='bounceInRight'  class="hidden">
+                        <div class="row content info">
+                                <br>
+                                <br>
+                                <div>
+                                        <span ng-bind-html="evt.info.ou"></span>
+                                </div>
+                        </div>
+                </div>
+                <div when-visible="animateElementIn" when-not-visible="animateElementOut" data-effect='bounceInLeft' class="not-to-mobile">
+                                <div class="desc">
+                                        <p>DESCRIPTION</p>
+                                </div>
+                        </div>
+                        <div when-visible="animateElementIn" when-not-visible="animateElementOut" data-effect="bounceInRight" class="not-to-mobile">
+                                <div class="row content info">
+                                        <br>
+                                        <br>
+                                        <div >
+                                                <span class="info-descritpion" ng-bind-html="evt.info.description"></span>
+                                        </div>
+                                </div>
+                        </div>
+
+</div>
+<br>
+<br>
 <slider></slider>
 <art-footer></art-footer>

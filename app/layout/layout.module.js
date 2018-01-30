@@ -6,12 +6,13 @@ import {
 import '../module/slider.js';
 import '../module/agendaEvent.js';
 import '../services/animationServices.js';
+import '../services/locationServices.js';
 import '../js/angular-scroll-animate.js';
 
 (function () {
 	'use strict';
 
-	const app = angular.module('layout', ['slider', 'agendaEvenementModule', 'angular-scroll-animate', 'services']);
+	const app = angular.module('layout', ['slider', 'agendaEvenementModule', 'angular-scroll-animate', 'services', 'locationServices']);
 	app.controller("AccueilController", ['$scope', 'AnimationInOut', function ($scope, AnimationInOut) {
 		$scope.anim = true;
 		$scope.animateElementIn = AnimationInOut.animateElementIn;
@@ -20,9 +21,10 @@ import '../js/angular-scroll-animate.js';
 	}]);
 
 
-	app.directive('artMenu', function ($rootScope, $location, $window, $anchorScroll) {
+	app.directive('artMenu',  ['$rootScope', '$location', '$window', 'LocationServices', function ($rootScope, $location, $window, LocationServices) {
 		$rootScope.scrollTo = function (theId) {
-			$window.record.location = $location;
+			
+			let domain = LocationServices.getDomainWithHttp(); 
 			$window.record.theId = theId;
 			if (theId === '.art0' && $location.path() != "/") {
 				$('html, body').animate({
@@ -31,9 +33,8 @@ import '../js/angular-scroll-animate.js';
 				$location.path("/");
 			} else {
 				if ($location.path().indexOf("desc/") > 0) {
-					$window.location.href = $location.protocol() +
-						"://" + $location.host() + ":9000/#/#" + theId.substr(1);
-
+					let url = domain + "/#/#" + theId.substr(1);
+					LocationServices.goTo(url);			
 				} else {
 					let offset = 70;
 					let target = $(theId).offset() != undefined && $(theId).offset().top != undefined ?
@@ -55,7 +56,7 @@ import '../js/angular-scroll-animate.js';
 		return {
 			templateUrl: 'app/layout/tmpl/menu.html'
 		};
-	});
+	}]);
 	app.directive('artContenuAccueil', function () {
 
 		return {

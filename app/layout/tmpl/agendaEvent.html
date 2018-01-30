@@ -1,46 +1,23 @@
 
-<div ng-repeat="evt in currentAgenda  | limitTo: limit" when-visible="animateElementIn" when-not-visible="animateElementOut" class="hidden evt  accueil-container"
+<div ng-repeat="evt in currentAgenda  | limitTo: limit" when-visible="animateElementIn" when-not-visible="animateElementOut" class="hidden evt  accueil-container not-to-mobile"
     data-effect='rotateInDownRight' data-effect2='rotateInDownLeft'>
 	
 
 
 	<h3 class="ng-binding">{{evt.affiche.leMoisHTML}} {{evt.affiche.leNumeroDuJourHTML}} {{evt.info.titre}}</h3>
 	<div class="ng-binding">
-			<a href="{{evt.info.evtFacebook}}" target="_blank">
+			<a href="{{evt.evtInfo}}" >
 	    <span ng-bind-html="evt.info.titre"></span>
 		<span ng-bind-html="evt.info.description"></span>
+	</a><br><br>
+	<a  ng-if="evt.info.evtFacebook" href="{{evt.info.evtFacebook}}" target="_blank">
+			Voir sur facebook
 	</a>
+
 	</div>
-	<div class="ng-binding">
-		
+	<div class="ng-binding">		
 		<br>
 		<a target="_blank" href="{{evt.info.adresseGoogle}}">
 			{{evt.info.adresse}}</a>
 	</div>
-
-
-	<!-- <table cols="4" cellspacing="0" cellpadding="0" class="accueil">
-		<tr>
-			<td class="dates">
-				<span class="dates">{{evt.affiche.leMoisHTML}}</span>
-				<span class="dates">{{evt.affiche.leNumeroDuJourHTML}}</span>
-			</td>
-			<td>
-				<div class="">
-					<a href="{{evt.info.evtFacebook}}" target="_blank">
-						<span class=""> {{evt.info.titre}} </span>
-					</a>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td> </td>
-			<td>
-				<div class="">
-					<a target="_blank" href="{{evt.info.adresseGoogle}}">
-						{{evt.info.adresse}}</a>
-				</div>
-			</td>
-		</tr>
-	</table> -->
 </div>

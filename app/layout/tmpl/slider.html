@@ -2,7 +2,7 @@
   <div  class="container slider menu-slider-relative" ng-mouseenter="enableAuto(false)" ng-mouseleave="enableAuto()">
     <div class="menu-slider-absolute" >
       <div ng-repeat="slide in slides" >
-        <img class="slide slide-animation" ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}" id="{{slide.id}}" ng-click="goTo('url', $index)">
+        <img class="slide slide-animation ng-class:isClick" ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}" id="{{slide.id}}" ng-click="goTo('url', $index)">
       </div>
       <div class="menu-slider-nav" ng-show="{{showTopMenu}}">
         <nav>

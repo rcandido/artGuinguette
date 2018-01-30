@@ -3,13 +3,22 @@ import '../js/menu.js';
 
 let widthMax = 1000;
 const app = angular.module('slider', ['ngAnimate'])
-  .controller('MainCtrl', function ($scope, $rootScope, $window, $timeout, $document, $location) {
+  .controller('MainCtrl', function ($scope, $rootScope, $window, $timeout, $document, $location, $routeParams) {
     $rootScope.page='slider';
-    $scope.showTopMenu = $location.path() === "/" ? true : false;
+    $scope.sousdossier = '';
+    $scope.showTopMenu = true ;
+    $scope.isClick = 'slide-clickable';
+    if($location.path() != "/") {
+      $scope.isClick = '';
+      $scope.showTopMenu = false;
+      var msg2 = $routeParams.msg.split("-");
+      $scope.sousdossier =  msg2[1] + '/';
+    }
     $scope.theTimeout;
     $scope.defaultTimeToChange = 2000;
     $scope.defaultTimeToCheck = 500;
     $scope.currentTimeToChange = $scope.defaultTimeToChange;
+
     $scope.autosideTimeout = function () {
       $scope.enableAutoCanceled = false;
       //time
@@ -30,46 +39,46 @@ const app = angular.module('slider', ['ngAnimate'])
 
     $scope.enableAutoSlide = $scope.enableAutoSlide !== undefined ? true : $scope.enableAutoSlide;
     $scope.slides = [{
-        image: 'app/img/slider1.jpg',
+        image: 'app/img/' + $scope.sousdossier + 'slider0.jpg',
         description: 'Image 00',
-        url: 'desc/00',
-        id:'sImg00'
+        url: 'desc/0',
+        id:'3'
       },
       {
-        image: 'app/img/slider2.jpg',
+        image: 'app/img/' + $scope.sousdossier + 'slider1.jpg',
         description: 'Image 01',
-        url: 'desc/01',
-        id:'sImg01'
+        url: 'desc/1',
+        id:'3'
       },
       {
-        image: 'app/img/slider3.jpg',
+        image: 'app/img/' + $scope.sousdossier + 'slider2.jpg',
         description: 'Image 02',
-        url: 'desc/02',
-        id:'sImg02'
+        url: 'desc/2',
+        id:'1'
       },
       {
-        image: 'app/img/slider4.jpg',
+        image: 'app/img/' + $scope.sousdossier + 'slider3.jpg',
         description: 'Image 03',
-        url: 'desc/03',
-        id:'sImg03'
+        url: 'desc/3',
+        id:'1'
       },
       {
-        image: 'app/img/slider5.jpg',
+        image: 'app/img/' + $scope.sousdossier + 'slider4.jpg',
         description: 'Image 04',
-        url: 'desc/04',
-        id:'sImg04'
+        url: 'desc/4',
+        id:'2'
       },
       {
-        image: 'app/img/slider6.jpg',
+        image: 'app/img/' + $scope.sousdossier + 'slider5.jpg',
         description: 'Image 05',
-        url: 'desc/05',
-        id:'sImg05'
+        url: 'desc/5',
+        id:'2'
       },
       {
-        image: 'app/img/slider7.jpg',
+        image: 'app/img/' + $scope.sousdossier + 'slider6.jpg',
         description: 'Image 06',
-        url: 'desc/06',
-        id:'sImg06'
+        url: 'desc/6',
+        id:'1'
       }
     ];
 
@@ -100,8 +109,10 @@ const app = angular.module('slider', ['ngAnimate'])
        }
     };
     $scope.goTo = function (url, $index) {
-      if ($scope.slides[$index].url != undefined && $scope.slides[$index].url !== '') {
-       $location.path($scope.slides[$index].url)
+      if(!$scope.showTopMenu) {
+        return false;
+      } else if ($scope.slides[$index].url != undefined && $scope.slides[$index].url !== '') {
+       $location.path($scope.slides[$index].url + "-" + $scope.slides[$index].id)
       }
     };
     $scope.enableAuto = function (value = true) {
@@ -112,10 +123,9 @@ const app = angular.module('slider', ['ngAnimate'])
 
     $scope.autosideTimeout();
     angular.element(document).ready(function () {
+  
       var lesSlides = document.getElementsByClassName('slide');
-
       if (lesSlides.length > 0) {
-
         for (var i = 0; i < lesSlides.length; i++) {
           var leSlide = lesSlides[i];
           var originalWidth = leSlide.width;
@@ -130,6 +140,9 @@ const app = angular.module('slider', ['ngAnimate'])
             leSlide.height = targetHeight;
           } else if (targetWidth < widthMax) {
             leSlide.margin = 'auto';
+          } else if(targetWidth == 0) {
+            leSlide.width = 'auto';
+            leSlide.height = 'auto';
           }
         }
       }

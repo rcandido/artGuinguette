@@ -5,9 +5,9 @@ import {
 import '../services/animationServices.js';
 import '../js/angular-scroll-animate.js';
 
-const appEvt = angular.module('agendaEvenementModule', ['angular-scroll-animate', 'services', 'ngSanitize']);
+const app = angular.module('agendaEvenementModule', ['angular-scroll-animate', 'services', 'ngSanitize']);
 
-appEvt.controller("EvtController", ['$scope', 'AnimationInOut', function ($scope, AnimationInOut) {
+app.controller("EvtController", ['$scope', 'AnimationInOut', function ($scope, AnimationInOut) {
   $scope.animObject = AnimationInOut;
   $scope.anim = $scope.animObject.turnInOn();
   $scope.animateElementIn = $scope.animObject.animateElementIn;
@@ -37,7 +37,7 @@ appEvt.controller("EvtController", ['$scope', 'AnimationInOut', function ($scope
 
 
 
-appEvt.directive("artEvenement", function ($rootScope) {
+app.directive("artEvenement", function ($rootScope) {
 
   return {
     restrict: 'E',

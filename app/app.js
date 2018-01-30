@@ -2,24 +2,19 @@ import './css/style.scss';
 import './css/menu.scss';
 import './css/animate.scss';
 import './layout/layout.module.js';
+import './module/info.module.js';
 import {maRoute} from './services/route.js';
 
 
 
-const app = angular.module('main', ['ngRoute', 'layout']);
+const app = angular.module('main', ['ngRoute', 'layout','infoModule']);
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$locationProvider
 		.hashPrefix('');
 		maRoute($routeProvider);
 }]);
 
-app.controller('MessageController', function($routeParams, $scope, $rootScope) {
-	'ngInject';
 
-	this.message = $routeParams.msg;
-	$scope.message = this.message;
-	
-});
 app.service('remyCss', function RemyCss($document) {
 	'ngInject';
 	this.onload = function(url) {
@@ -35,7 +30,6 @@ app.service('remyCss', function RemyCss($document) {
 app.run(function(remyCss, $location,$window) {
 	'ngInject';
 	var img = '/app/img/menu.jpg';
-	console.log('$location.path', $location.path());
 	if ($location.path() === '' || $location.path() === '/' || $location.path() === '/hello') {
 		remyCss.onload(img);
 	} 
