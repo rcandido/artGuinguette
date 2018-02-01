@@ -2,7 +2,7 @@ export var maRoute = function ($routeProvider) {
 
     $routeProvider
         .when('/', {
-            templateUrl: 'app/layout/tmpl/acceuil.html'
+            templateUrl: 'app/layout/tmpl/accueil.html'
         })
         .when('/coucou', {
             templateUrl: 'app/layout/tmpl/empty.html'
@@ -13,6 +13,6 @@ export var maRoute = function ($routeProvider) {
             controllerAs: '$ctrl'
         })
         .otherwise({
-           // redirectTo: '/'
+            // redirectTo: '/'
         });
 }

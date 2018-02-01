@@ -7,6 +7,7 @@ import '../module/slider.js';
 import '../module/agendaEvent.js';
 import '../services/animationServices.js';
 import '../services/locationServices.js';
+//import '../services/dataServices.js';
 import '../js/angular-scroll-animate.js';
 
 (function () {
@@ -68,5 +69,4 @@ import '../js/angular-scroll-animate.js';
 			templateUrl: 'app/layout/tmpl/footer.html'
 		};
 	});
-
 })();
