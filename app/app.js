@@ -1,13 +1,13 @@
 import './css/style.scss';
 import './css/menu.scss';
 import './css/animate.scss';
-import './layout/layout.module.js';
+import './module/accueil.module.js';
 import './module/info.module.js';
 import {maRoute} from './services/route.js';
 
 
 
-const app = angular.module('main', ['ngRoute', 'layout','infoModule']);
+const app = angular.module('main', ['ngRoute', 'accueil','infoModule']);
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$locationProvider
 		.hashPrefix('');

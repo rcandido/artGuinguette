@@ -1,7 +1,7 @@
 var $ = require("jquery");
 
-import '../module/slider.js';
-import '../module/agendaEvent.js';
+import '../module/slider.module.js';
+import '../module/agendaEvent.module.js';
 import '../services/animationServices.js';
 import '../services/locationServices.js';
 import '../js/angular-scroll-animate.js';
@@ -9,7 +9,7 @@ import '../js/angular-scroll-animate.js';
 (function () {
 	'use strict';
 
-	const app = angular.module('layout', ['slider', 'agendaEvenementModule', 'angular-scroll-animate', 'services', 'locationServices']);
+	const app = angular.module('accueil', ['slider', 'agendaEvenementModule', 'angular-scroll-animate', 'services', 'locationServices']);
 	app.controller("AccueilController", ['$scope', 'AnimationInOut', function ($scope, AnimationInOut) {
 		$scope.anim = true;
 		$scope.animateElementIn = AnimationInOut.animateElementIn;
