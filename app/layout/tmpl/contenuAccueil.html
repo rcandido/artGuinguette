@@ -35,10 +35,10 @@
         <div class="evenement">
 
             <div ng-controller="EvtController">
-                <div class="">{{eventLabel.after}}</div>
-                <art-evenement asked-agenda="agendaPosterieur"></art-evenement>
-                <div class="">{{eventLabel.before}}</div>
-                <art-evenement asked-agenda="agendaAnterieur"></art-evenement>
+                <div class="not-visible">{{eventLabel.after}}</div>
+                <art-evenement asked-agenda="agendaPosterieur" asked-title="evtTitleAfter"></art-evenement>
+                <div class="not-visible">{{eventLabel.before}}</div>
+                <art-evenement asked-agenda="agendaAnterieur" asked-title="evtTitleBefore"></art-evenement>
             </div>
         </div>
     </p>

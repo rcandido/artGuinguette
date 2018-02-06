@@ -1,22 +1,21 @@
 import '../services/animationServices.js';
 import '../js/angular-scroll-animate.js';
+import '../services/dataServices.js';
 import {
-  defaultAgenda,
-  rempliMoiCa,
-  agendaComplet,
-  getAgenda
-} from '../js/filedData';
+  getEvent
+} from '../js/dataProcessing.js';
 
 (function () {
-  const app = angular.module('infoModule', ['services']);
-  // 'angular-scroll-animate', 'services', 'ngSanitize'
-  app.controller("InfoControler", ['$scope', '$routeParams', '$window', '$anchorScroll', 'AnimationInOut', function ($scope, $routeParams, $window, $anchorScroll, AnimationInOut) {
+
+  const app = angular.module('infoModule', ['services', 'dataServices']);
+  app.controller("InfoControler", ['$scope', '$routeParams', '$window', '$anchorScroll', '$q', 'AnimationInOut', 'GetArtDatas', function ($scope, $routeParams, $window, $anchorScroll, $q, AnimationInOut, GetArtDatas) {
     'ngInject';
+
+    var screenWidth = $window.innerWidth;
     $window.record = $scope;
     $scope.isDesktop = function () {
       return $window.outerWidth > 700;
     }
-    var screenWidth = $window.innerWidth;
 
     $anchorScroll();
     $scope.animObject = AnimationInOut;
@@ -29,16 +28,28 @@ import {
       return false
     };
 
-
-
     let messageComplet = $routeParams.msg.split("-");
     this.message = messageComplet[0];
     $scope.message = messageComplet[0];
     $scope.id = messageComplet[1];
 
-    $scope.evt = getAgenda($scope.id);
-    $scope.getHeroClass = function (page) {
-      return "hero-" + $scope.message;
-    }
+    var Regions = GetArtDatas.getEvents();
+    $scope.regions = Regions.query();
+
+
+    let thisEvent = GetArtDatas.getEvent($scope.id);
+
+    $scope.evt = thisEvent.get();
+
+
+
+    $scope.evt.$promise.then(function (data) {
+      $scope.evt = getEvent($scope.id, $scope.evt);
+      $scope.getHeroClass = function (page) {
+        return "hero-" + $scope.message;
+      }
+
+    });
+
   }]);
 })();

@@ -1,13 +1,9 @@
 var $ = require("jquery");
-import {
-	defaultAgenda,
-	rempliMoiCa
-} from '../js/filedData';
+
 import '../module/slider.js';
 import '../module/agendaEvent.js';
 import '../services/animationServices.js';
 import '../services/locationServices.js';
-//import '../services/dataServices.js';
 import '../js/angular-scroll-animate.js';
 
 (function () {
@@ -20,7 +16,6 @@ import '../js/angular-scroll-animate.js';
 		$scope.animateElementOut = AnimationInOut.animateElementOut;
 
 	}]);
-
 
 	app.directive('artMenu',  ['$rootScope', '$location', '$window', 'LocationServices', function ($rootScope, $location, $window, LocationServices) {
 		$rootScope.scrollTo = function (theId) {
