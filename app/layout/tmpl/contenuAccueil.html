@@ -35,9 +35,9 @@
         <div class="evenement">
 
             <div ng-controller="EvtController">
-                <div ng-show="isShowAfter('agendaAnterieur')">{{evtTitleAfter}}</div>
+                <div ng-show="isShowTitleSection('agendaAnterieur')">{{evtTitleAfter}}</div>
                 <art-evenement asked-agenda="agendaPosterieur" ></art-evenement>
-                <div ng-show="isShowAfter('agendaPosterieur')">{{evtTitleBefore}}</div>
+                <div ng-show="isShowTitleSection('agendaPosterieur')">{{evtTitleBefore}}</div>
                 <art-evenement asked-agenda="agendaAnterieur" asked-title="evtTitleBefore"></art-evenement>
             </div>
         </div>

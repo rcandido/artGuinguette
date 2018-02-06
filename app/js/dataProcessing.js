@@ -2,8 +2,8 @@
 import {
     labelDay,
     labelMonth
-} from './myConst.js';
-var start = Date.now();
+} from './myConst';
+let start = Date.now();
 function dateElement(element) {
     element.date = new Date(element.date);
     element.affiche = {
@@ -21,7 +21,7 @@ export function transformAgenda(agenda) {
         before: [],
         after: []
     };
-    var i = 0;
+    let i = 0;
     agenda.forEach(element => {
         dateElement(element);
         if (element.date < start) {
@@ -31,7 +31,6 @@ export function transformAgenda(agenda) {
         }
         i++;
     });
-    var i = 0;
     return transformedAgenda;
 };
 

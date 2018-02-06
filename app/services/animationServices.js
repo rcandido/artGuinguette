@@ -1,9 +1,9 @@
 (function () {
   'use strict';
 
-  var services = angular.module('services', []);
+  let services = angular.module('services', []);
   services.factory('AnimationInOut', function ($window) {
-
+    // Init
     let animationInOut = {};
     let animationIn;
     const animationDefault = 'fadeInDown';
@@ -24,6 +24,7 @@
       return animationIn;
     };
 
+    // Sometime we want to toggle 2 differents anims 
     animationInOut.animateElementIn = function ($el, $scope) {
       let animationType = $el[0].dataset.effect != undefined ? $el[0].dataset.effect : animationDefault;
       let animationType2 = $el[0].dataset.effect2 != undefined ? $el[0].dataset.effect2 : animationType;
@@ -41,6 +42,7 @@
 
     };
 
+    // Sometime we want to toggle 2 differents anims
     animationInOut.animateElementOut = function ($el, $scope) {
       let animationType = $el[0].dataset.effect != undefined ? $el[0].dataset.effect : animationDefault;
       let animationType2 = $el[0].dataset.effect2 != undefined ? $el[0].dataset.effect : animationType;
@@ -56,21 +58,22 @@
       }
     }
 
+    // To launch animations just have to call animationInOut.start($scope) 
     animationInOut.start = function ($scope) {
       if(!$scope) {
           throw Error('cannot start animation without $scope');
       }
-      $scope.anim = $scope.animObject.turnInOn();
+      $scope.anim = animationInOut.turnInOn();
       if ($scope.notMobileAnimation) {
-        $scope.animateElementIn = $scope.isDesktop ? $scope.animObject.animateElementIn : function () {
+        $scope.animateElementIn = $scope.isDesktop ? animationInOut.animateElementIn : function () {
           return false
         };
-        $scope.animateElementOut = $scope.isDesktop ? $scope.animObject.animateElementOut : function () {
+        $scope.animateElementOut = $scope.isDesktop ? animationInOut.animateElementOut : function () {
           return false
         };
       } else {
-        $scope.animateElementIn = $scope.animObject.animateElementIn;
-        $scope.animateElementOut = $scope.animObject.animateElementOut;
+        $scope.animateElementIn = animationInOut.animateElementIn;
+        $scope.animateElementOut = animationInOut.animateElementOut;
       }
     }
 

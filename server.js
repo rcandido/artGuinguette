@@ -6,7 +6,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 
 var app = express();
 
-const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('./webpack.config');
 webpackConfig.output.path = '/';
 const compiler = webpack(webpackConfig);
 // eslint-disable-next-line

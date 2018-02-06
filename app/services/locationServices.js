@@ -1,7 +1,8 @@
+// Deprecated 
 (function () {
   'use strict';
 
-  var services = angular.module('locationServices', []);
+  let services = angular.module('locationServices', []);
   services.factory('LocationServices', function ($window) {
     let currentEnvironment = {};
     currentEnvironment.getDomain = function () {
@@ -9,17 +10,15 @@
     };
 
     currentEnvironment.getResoureceDomain = function () {
-      return 'localhost:3000'; //TODO change by env property file
+      return 'localhost:3000'; // TODO change by env property file
     };
 
     currentEnvironment.getDomainWithHttp = function () {
-      return $window.location.protocol + "//" + currentEnvironment.getDomain(); //TODO change by env property file
+      return $window.location.protocol + '//' + currentEnvironment.getDomain(); // TODO change by env property file
     };
     currentEnvironment.goTo = function (url) {
       $window.location.href = url;
     };
-
-
     return currentEnvironment;
   });
 })();

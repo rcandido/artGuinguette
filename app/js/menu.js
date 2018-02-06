@@ -1,5 +1,5 @@
 'use strict';
-var $ = require("jquery");
+var $ = require('jquery');
 // Sticky Header
 $(window).scroll(function() {
 
@@ -29,7 +29,7 @@ $('.main_h li a').click(function() {
 
 // navigation scroll
 $('nav a').click(function(event) {
-    var id = $(this).attr("href");
+    var id = $(this).attr('href');
     var offset = 70;
     var target = $(id).offset().top - offset;
     $('html, body').animate({

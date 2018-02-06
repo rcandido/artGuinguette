@@ -1,18 +1,19 @@
-import '../js/menu.js';
+import '../js/menu';
+import '../services/dataServices';
 
 (function () {
   let widthMax = 1000;
-  const app = angular.module('slider', ['ngAnimate'])
-    .controller('MainCtrl', function ($scope, $rootScope, $window, $timeout, $document, $location, $routeParams) {
-      $rootScope.page = 'slider';
-      $scope.sousdossier = '';
+  const app = angular.module('slider', ['ngAnimate', 'dataServices'])
+    .controller('MainCtrl', function ($scope, $rootScope, $window, $timeout, $document, $location, $routeParams, GetArtDatas) {
+      
+      $scope.sousdossier = '0';
       $scope.showTopMenu = true;
       $scope.isClick = 'slide-clickable';
-      if ($location.path() != "/") {
+      if ($location.path() != '/') {
         $scope.isClick = '';
         $scope.showTopMenu = false;
-        var msg2 = $routeParams.msg.split("-");
-        $scope.sousdossier = msg2[1] + '/';
+        let msg2 = $routeParams.msg.split('-');
+        $scope.sousdossier = msg2[1];
       }
       $scope.theTimeout;
       $scope.defaultTimeToChange = 2000;
@@ -34,58 +35,22 @@ import '../js/menu.js';
 
       $scope.stopTimeout = function () {
         $timeout.cancel($scope.theTimeout);
-        console.log("Timer Stopped");
+        console.log('Timer Stopped');
       };
 
       $scope.enableAutoSlide = $scope.enableAutoSlide !== undefined ? true : $scope.enableAutoSlide;
-      $scope.slides = [{
-          image: 'app/img/' + $scope.sousdossier + 'slider0.jpg',
-          description: 'Image 00',
-          url: 'desc/0',
-          id: '3'
-        },
-        {
-          image: 'app/img/' + $scope.sousdossier + 'slider1.jpg',
-          description: 'Image 01',
-          url: 'desc/1',
-          id: '3'
-        },
-        {
-          image: 'app/img/' + $scope.sousdossier + 'slider2.jpg',
-          description: 'Image 02',
-          url: 'desc/2',
-          id: '1'
-        },
-        {
-          image: 'app/img/' + $scope.sousdossier + 'slider3.jpg',
-          description: 'Image 03',
-          url: 'desc/3',
-          id: '1'
-        },
-        {
-          image: 'app/img/' + $scope.sousdossier + 'slider4.jpg',
-          description: 'Image 04',
-          url: 'desc/4',
-          id: '2'
-        },
-        {
-          image: 'app/img/' + $scope.sousdossier + 'slider5.jpg',
-          description: 'Image 05',
-          url: 'desc/5',
-          id: '2'
-        },
-        {
-          image: 'app/img/' + $scope.sousdossier + 'slider6.jpg',
-          description: 'Image 06',
-          url: 'desc/6',
-          id: '1'
-        }
-      ];
+
+      $scope.slides = [];
+      GetArtDatas.getSlide($scope.sousdossier, $rootScope).then(function(data) {
+        $rootScope.slide[$scope.sousdossier] = data;
+        $scope.slides = data;
+      });
 
       if ($rootScope.currentIndex === undefined) {
         $scope.currentIndex = 0;
       }
 
+      // Slide navigation
       $scope.setCurrentSlideIndex = function (index) {
         $scope.currentTimeToChange += 2000;
         $scope.currentIndex = index;
@@ -93,6 +58,8 @@ import '../js/menu.js';
       $scope.isCurrentSlideIndex = function (index) {
         return $scope.currentIndex === index;
       };
+
+      // Show previous
       $scope.prevSlide = function (isFromAutoSlide = false) {
         $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
         $rootScope.currentIndex = $scope.currentIndex;
@@ -100,21 +67,29 @@ import '../js/menu.js';
           $scope.currentTimeToChange += 2000;
         }
       };
-      $scope.nextSlide = function (isFromAutoSlide = false) {
 
+      // Show next
+      $scope.nextSlide = function (isFromAutoSlide = false) {
+        if(!$scope.slides) {
+            return false;
+        }
         $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
         $rootScope.currentIndex = $scope.currentIndex;
         if (!isFromAutoSlide) {
           $scope.currentTimeToChange += 2000;
         }
       };
+
+      // Show selected slide
       $scope.goTo = function (url, $index) {
         if (!$scope.showTopMenu) {
           return false;
         } else if ($scope.slides[$index].url != undefined && $scope.slides[$index].url !== '') {
-          $location.path($scope.slides[$index].url + "-" + $scope.slides[$index].id)
+          $location.path($scope.slides[$index].url + '-' + $scope.slides[$index].id)
         }
       };
+
+      // actice slider auto
       $scope.enableAuto = function (value = true) {
         if ($scope.enableAutoSlide && $scope.enableAutoCanceled) {
           $scope.autosideTimeout();
@@ -124,18 +99,20 @@ import '../js/menu.js';
       $scope.autosideTimeout();
       angular.element(document).ready(function () {
 
-        var lesSlides = document.getElementsByClassName('slide');
+        // Get photos size info
+        let lesSlides = document.getElementsByClassName('slide');
         if (lesSlides.length > 0) {
-          for (var i = 0; i < lesSlides.length; i++) {
-            var leSlide = lesSlides[i];
-            var originalWidth = leSlide.width;
-            var originalHeight = leSlide.height;
-            var targetHeight = originalHeight;
-            var targetWidth = originalWidth;
-
+          // Check photos
+          for (let i = 0; i < lesSlides.length; i++) {
+            let leSlide = lesSlides[i];
+            let originalWidth = leSlide.width;
+            let originalHeight = leSlide.height;
+            let targetHeight = originalHeight;
+            let targetWidth = originalWidth;
+            // If photo is too big we need to resize
             if (targetWidth > widthMax) {
               targetWidth = widthMax;
-              var rapport = targetWidth / originalWidth;
+              let rapport = targetWidth / originalWidth;
               targetHeight = targetHeight * rapport;
               leSlide.height = targetHeight;
             } else if (targetWidth < widthMax) {
@@ -153,14 +130,16 @@ import '../js/menu.js';
         addClass: function (element, className, done) {
 
           if (className == 'ng-hide') {
-            var originalWidth = element[0].width;
-            var originalHeight = element[0].height;
-            var targetHeight = originalHeight;
-            var targetWidth = originalWidth;
+            let originalWidth = element[0].width;
+            let originalHeight = element[0].height;
+            let targetHeight = originalHeight;
+            let targetWidth = originalWidth;
+            // If photo is too big we need to resize
             if (targetWidth > widthMax) {
               targetWidth = widthMax;
             }
-            var rapport = targetWidth / originalWidth;
+            // Resize
+            let rapport = targetWidth / originalWidth;
             targetHeight = targetHeight * rapport;
             TweenMax.to(element, 0.5, {
               left: -targetWidth,
@@ -172,10 +151,10 @@ import '../js/menu.js';
         },
         removeClass: function (element, className, done) {
           if (className == 'ng-hide') {
-            var originalWidth = element[0].width;
-            var originalHeight = element[0].height;
-            var targetHeight = originalHeight;
-            var targetWidth = originalWidth;
+            let originalWidth = element[0].width;
+            let originalHeight = element[0].height;
+            let targetHeight = originalHeight;
+            let targetWidth = originalWidth;
             element.removeClass('ng-hide');
             TweenMax.set(element, {
               left: targetWidth

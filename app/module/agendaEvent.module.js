@@ -1,41 +1,39 @@
-import {transformAgenda} from '../js/dataProcessing.js';
-import '../services/animationServices.js';
-import '../services/dataServices.js';
-import '../js/angular-scroll-animate.js';
-import '../js/myConst.js';
+import {transformAgenda} from '../js/dataProcessing';
+import '../services/animationServices';
+import '../services/dataServices';
+import '../js/angular-scroll-animate';
+import '../js/myConst';
 
 (function () {
   const app = angular.module('agendaEvenementModule', ['angular-scroll-animate', 'services', 'dataServices', 'ngSanitize']);
-  app.controller("EvtController", ['$scope', '$q', 'AnimationInOut', 'GetArtDatas', function ($scope, $q, AnimationInOut, GetArtDatas) {
+  app.controller('EvtController', ['$scope', '$q', 'AnimationInOut', 'GetArtDatas', function ($scope, $q, AnimationInOut, GetArtDatas) {
    
-    //manage animation
-    $scope.animObject = AnimationInOut;
+    // Manage animation
     AnimationInOut.start($scope);
 
-    // Manage 
+    // Init events  
     $scope.limit = 10;
     $scope.evtTitleAfter = `A noter sur vos agendas`;
     $scope.evtTitleBefore = `C'est trop tard mais il est encore temps de jeter un oeil`;
     $scope.agendaAnterieur = [];
     $scope.agendaPosterieur = [];
 
-
-    var Events = GetArtDatas.getEvents();
-    var pEvents = Events.query();
+    // Get events
+    let Events = GetArtDatas.getEvents();
+    let pEvents = Events.query();
     pEvents.$promise.then(function (data) {
         let transformedData = transformAgenda(data);
         $scope.agendaAnterieur = transformedData.before;
         $scope.agendaPosterieur = transformedData.after;
     });
 
-    $scope.isShowAfter = (agendaType) => {
+    // Manage visibility section title
+    $scope.isShowTitleSection= (agendaType) => {
         return $scope[agendaType] !== undefined && $scope[agendaType].length > 0 ? true : false; 
     }
-
-
   }]);
 
-  app.directive("artEvenement", function ($rootScope) {
+  app.directive('artEvenement', function ($rootScope) {
 
     return {
       restrict: 'E',
