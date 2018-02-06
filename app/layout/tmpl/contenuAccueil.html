@@ -35,9 +35,9 @@
         <div class="evenement">
 
             <div ng-controller="EvtController">
-                <div class="not-visible">{{eventLabel.after}}</div>
-                <art-evenement asked-agenda="agendaPosterieur" asked-title="evtTitleAfter"></art-evenement>
-                <div class="not-visible">{{eventLabel.before}}</div>
+                <div ng-show="isShowAfter('agendaAnterieur')">{{evtTitleAfter}}</div>
+                <art-evenement asked-agenda="agendaPosterieur" ></art-evenement>
+                <div ng-show="isShowAfter('agendaPosterieur')">{{evtTitleBefore}}</div>
                 <art-evenement asked-agenda="agendaAnterieur" asked-title="evtTitleBefore"></art-evenement>
             </div>
         </div>

@@ -24,7 +24,6 @@
       return animationIn;
     };
 
-
     animationInOut.animateElementIn = function ($el, $scope) {
       let animationType = $el[0].dataset.effect != undefined ? $el[0].dataset.effect : animationDefault;
       let animationType2 = $el[0].dataset.effect2 != undefined ? $el[0].dataset.effect2 : animationType;
@@ -54,6 +53,24 @@
         $el.addClass('hidden');
         $el.removeClass('animated ' + animationType);
 
+      }
+    }
+
+    animationInOut.start = function ($scope) {
+      if(!$scope) {
+          throw Error('cannot start animation without $scope');
+      }
+      $scope.anim = $scope.animObject.turnInOn();
+      if ($scope.notMobileAnimation) {
+        $scope.animateElementIn = $scope.isDesktop ? $scope.animObject.animateElementIn : function () {
+          return false
+        };
+        $scope.animateElementOut = $scope.isDesktop ? $scope.animObject.animateElementOut : function () {
+          return false
+        };
+      } else {
+        $scope.animateElementIn = $scope.animObject.animateElementIn;
+        $scope.animateElementOut = $scope.animObject.animateElementOut;
       }
     }
 
