@@ -38,12 +38,49 @@ import '../services/dataServices';
         console.log('Timer Stopped');
       };
 
+      var resize = () => {
+        let lesSlides = document.getElementsByClassName('slide');  
+        if (lesSlides.length > 0) {
+          doResize(lesSlides)
+        } else {
+          lesSlides = document.getElementsByClassName('slide'); 
+          $timeout(function() { doResize(lesSlides) }, 4000);
+          }
+      }
+      var doResize = (lesSlides)=>{
+     
+        // Check photos
+        for (let i = 0; i < lesSlides.length; i++) {
+          let leSlide = lesSlides[i];
+          let originalWidth = leSlide.width;
+          let originalHeight = leSlide.height;
+          let targetHeight = originalHeight;
+          let targetWidth = originalWidth;
+        
+          // If photo is too big we need to resize
+          if (targetWidth > widthMax) {
+            targetWidth = widthMax;
+            let rapport = targetWidth / originalWidth;
+            targetHeight = targetHeight * rapport;
+            leSlide.width = targetWidth;
+            leSlide.height = targetHeight;
+            
+          } else if (targetWidth < widthMax) {          
+            leSlide.margin = 'auto';
+          } else if (targetWidth == 0) {            
+            leSlide.width = 'auto';
+            leSlide.height = 'auto';
+          }
+        } 
+      }
       $scope.enableAutoSlide = $scope.enableAutoSlide !== undefined ? true : $scope.enableAutoSlide;
 
       $scope.slides = [];
+      $scope.tomate = resize;
       GetArtDatas.getSlide($scope.sousdossier, $rootScope).then(function(data) {
         $rootScope.slide[$scope.sousdossier] = data;
         $scope.slides = data;
+        resize();                
       });
 
       if ($rootScope.currentIndex === undefined) {
@@ -98,32 +135,9 @@ import '../services/dataServices';
 
       $scope.autosideTimeout();
       angular.element(document).ready(function () {
-
-        // Get photos size info
-        let lesSlides = document.getElementsByClassName('slide');
-        if (lesSlides.length > 0) {
-          // Check photos
-          for (let i = 0; i < lesSlides.length; i++) {
-            let leSlide = lesSlides[i];
-            let originalWidth = leSlide.width;
-            let originalHeight = leSlide.height;
-            let targetHeight = originalHeight;
-            let targetWidth = originalWidth;
-            // If photo is too big we need to resize
-            if (targetWidth > widthMax) {
-              targetWidth = widthMax;
-              let rapport = targetWidth / originalWidth;
-              targetHeight = targetHeight * rapport;
-              leSlide.height = targetHeight;
-            } else if (targetWidth < widthMax) {
-              leSlide.margin = 'auto';
-            } else if (targetWidth == 0) {
-              leSlide.width = 'auto';
-              leSlide.height = 'auto';
-            }
-          }
-        }
-      });
+        resize();       
+    });
+     
 
     }).animation('.slide-animation', function () {
       return {

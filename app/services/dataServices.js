@@ -24,7 +24,7 @@ import {
         artDatas.getEvent = (id) => {
             let deferred = $q.defer();
             if ($rootScope.cachedAgendaById && $rootScope.cachedAgendaById[id]) {
-                deferred.resolve($rootScope.cachedAgendaById);
+                deferred.resolve($rootScope.cachedAgendaById[id]);
             } else {
                 if (!$rootScope.cachedAgendaById) {
                     $rootScope.cachedAgendaById = [];
@@ -36,10 +36,10 @@ import {
                 let agenda = [];
                 let AllAvents = artDatas.getEvents();
                 let pEvents = AllAvents.query();
-
                 let i = 0;
                 pEvents.$promise.then(function (data) {
                     try {
+                      
                         data.forEach(element => {
                             customDate(element);
                             element.cetait = '';
@@ -49,17 +49,19 @@ import {
                             }
                             id = parseInt(id);
                             if (element.id == id) {
-                                result = element;
+                                result = element;                       
+                                deferred.resolve(result);
                                 throw BreakException;
                             }
                             i++;
                         });
+                        deferred.resolve(false);
                     } catch (e) {
                         // 'break' is not allowed, but don't want to continue if the event is already found
                         if (e !== BreakException) throw e;
                     }
                     $rootScope.cachedAgendaById[id] = result;
-                    deferred.resolve(result);
+                    
                 });
             }
 
@@ -102,7 +104,7 @@ import {
                                 let theSlide = {
                                     image: 'app/img/' + si.id + '/slider' + i + '.jpg',
                                     description: 'Image ' + j,
-                                    url: 'desc/' + j,
+                                    url: 'desc/' + i,
                                     id: si.id
                                 };
                                 slide.push(theSlide);

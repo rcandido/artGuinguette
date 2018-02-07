@@ -26,6 +26,13 @@ import '../services/dataServices';
     $scope.message = messageComplet[0];
     $scope.id = messageComplet[1];
 
+    var style = document.createElement('style');
+style.type = 'text/css';
+style.innerHTML = '.cssClass { color: #F00; }';
+document.getElementsById('#heross')[0].appendChild(style);
+
+document.getElementById('someElementId').className = 'cssClass';
+
     // Get datas for view
     let thisEvent = GetArtDatas.getEvent($scope.id).then(function(data){
        $scope.evt = data;
