@@ -67,6 +67,57 @@ import {
 
             return deferred.promise;
         }
+
+
+
+        // Get one event with id 'id'
+        artDatas.saveEvent = (evt) => {
+            let id = evt.id;
+            let deferred = $q.defer();
+            if ($rootScope.cachedAgendaById && $rootScope.cachedAgendaById[id]) {
+                deferred.resolve($rootScope.cachedAgendaById[id]);
+            } else {
+                if (!$rootScope.cachedAgendaById) {
+                    $rootScope.cachedAgendaById = [];
+                }
+                let result = false;
+                let BreakException = {};
+                let start = Date.now();
+
+                let agenda = [];
+                let AllAvents = artDatas.getEvents();
+                let pEvents = AllAvents.query();
+                let i = 0;
+                pEvents.$promise.then(function (data) {
+                    try {
+                      
+                        data.forEach(element => {
+                            customDate(element);
+                            element.cetait = '';
+                            // Event already done
+                            if (element.date < start) {
+                                element.cetait = 'C\'était le :';
+                            }
+                            id = parseInt(id);
+                            if (element.id == id) {
+                                result = element;                       
+                                deferred.resolve(result);
+                                throw BreakException;
+                            }
+                            i++;
+                        });
+                        deferred.resolve(false);
+                    } catch (e) {
+                        // 'break' is not allowed, but don't want to continue if the event is already found
+                        if (e !== BreakException) throw e;
+                    }
+                    $rootScope.cachedAgendaById[id] = result;
+                    
+                });
+            }
+
+            return deferred.promise;
+        }
         // Get slide img
         artDatas.getSlide = (sd, $rootScope) => {
             let result = [];
@@ -78,7 +129,6 @@ import {
             }
             // Do nothing and resolve promise, already searched
             if ($rootScope.slide && $rootScope.slides[sd]) {
-
                 deferred.resolve($rootScope.slides[sd]);
             }      
             else { // New event (didn't displayed before)
@@ -89,13 +139,13 @@ import {
                 let slides = [];
 
                 pEvents.$promise.then(function (data) {
-                    data.forEach(element => {
+                   
+                    data.forEach(element => {               
                         result.push({
                             id: element.id, // Id of the event
                             number: element.slide // Number if photo about this event
                         });
                     });
-                   
                     if (sd == 0) {  // HomePage
                         let j = 0;
                         result.forEach(si => {

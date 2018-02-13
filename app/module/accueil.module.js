@@ -48,19 +48,19 @@ import '../js/angular-scroll-animate';
 			}
 		};
 		return {
-			templateUrl: 'app/layout/tmpl/menu.html'
+			templateUrl: 'app/views/menu.html'
 		};
 	}]);
 
 	app.directive('artContenuAccueil', function () {
 		return {
-			templateUrl: 'app/layout/tmpl/contenuAccueil.html'
+			templateUrl: 'app/views/contenuAccueil.html'
 		};
 	});
 
 	app.directive('artFooter', function () {
 		return {
-			templateUrl: 'app/layout/tmpl/footer.html'
+			templateUrl: 'app/views/footer.html'
 		};
 	});
 })();

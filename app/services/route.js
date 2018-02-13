@@ -2,14 +2,28 @@ export var maRoute = function ($routeProvider) {
 
     $routeProvider
         .when('/', {
-            templateUrl: 'app/layout/tmpl/accueil.html'
+            templateUrl: 'app/views/accueil.html'
         })
         .when('/desc/:msg', {
-            templateUrl: 'app/layout/tmpl/info.html',
+            templateUrl: 'app/views/info.html',
             controller: 'InfoControler',
-            controllerAs: '$ctrl'
+            controllerAs: '$ctrl',
+            resolve: {
+                updating: function(){
+                    return false;
+                }
+            }
+        }).when('/udesc/:msg', {
+            templateUrl: 'app/views/info.html',
+            controller: 'InfoControler',
+            controllerAs: '$ctrl',
+            resolve: {
+                updating:function(){
+                    return true;
+                }
+            }
         })
         .otherwise({
-            //redirectTo: '/'
+            redirectTo: '/'
         });
 }

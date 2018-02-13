@@ -429,10 +429,14 @@ $descRotation:-2deg;
   -moz-transform: rotate($quiRotation);
   -webkit-transform: rotate($quiRotation);
   -o-transform: rotate($quiRotation);
-
+ 
+  color: #eefbfb;
+}
+ .qui p{
+  line-height: 0; 
 }
 .ou {
-  background-color: #093d9e;
+  background-color: #093d9e; 
   transform: rotate($ouRotation);
   -ms-transform: rotate($ouRotation);
   -moz-transform: rotate($ouRotation);
@@ -463,6 +467,7 @@ $descRotation:-2deg;
 
 .info {
   font-size: 2rem;
+  text-align: center;
 }
 .info div span {
   color: #e0dbdb;

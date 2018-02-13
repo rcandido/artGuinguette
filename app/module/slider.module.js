@@ -185,7 +185,7 @@ import '../services/dataServices';
     });
   app.directive('slider', function ($window, $timeout) {
     return {
-      templateUrl: 'app/layout/tmpl/slider.html'
+      templateUrl: 'app/views/slider.html'
     }
   });
 

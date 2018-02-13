@@ -26,6 +26,10 @@ import '../js/myConst';
         $scope.agendaAnterieur = transformedData.before;
         $scope.agendaPosterieur = transformedData.after;
     });
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    $scope.dateToFrench = (dateIso) => {
+          return dateIso.toLocaleDateString('fr-FR', options).toUpperCase();
+    }
 
     // Manage visibility section title
     $scope.isShowTitleSection= (agendaType) => {
@@ -43,7 +47,7 @@ import '../js/myConst';
         currentAgenda: '=askedAgenda',
         currentTitle: '=askedTitle'
       },
-      templateUrl: 'app/layout/tmpl/agendaEvent.html'
+      templateUrl: 'app/views/agendaEvent.html'
     };
   });
 })();

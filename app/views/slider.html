@@ -1,0 +1,29 @@
+<div ng-controller="MainCtrl" class="body art0" >
+  <div  class="container slider menu-slider-relative" ng-mouseenter="enableAuto(false)" ng-mouseleave="enableAuto()">
+    <div class="menu-slider-absolute" >
+      <div ng-repeat="slide in slides" >
+        <img class="slide slide-animation ng-class:isClick" ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}" id="{{slide.id}}" ng-click="goTo('url', $index)">
+      </div>
+      <div class="menu-slider-nav" ng-show="{{showTopMenu}}">
+        <nav>
+          <ul>
+              <li> <a href="" ng-click="scrollTo('.sec01')" class="nav-a-slider15">Art et Guinguette</a> </li>
+              <li><a href="" ng-click="scrollTo('.sec02')" class="nav-a-slider13">Contact </a></li>
+              <li> <a href="" ng-click="scrollTo('.sec03')" class="nav-a-slider17">Agenda</a> </li>     
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <span class="arrow prev" href="#" ng-click="prevSlide(true)"></span>
+    <span class="arrow next" href="#" ng-click="nextSlide(true)"></span>
+    <nav class="nav">
+      <div class="wrapper">
+        <ul class="dots">
+          <li class="dot" ng-repeat="slide in slides">
+            <span href="#" ng-class="{'active':isCurrentSlideIndex($index)}" ng-click="setCurrentSlideIndex($index);">.</span>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

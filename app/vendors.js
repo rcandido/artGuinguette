@@ -5,3 +5,4 @@ import 'angular-animate';
 import 'angular-sanitize';
 import 'angular-resource';
 import 'gsap';
+import 'file-system';

@@ -1,0 +1,46 @@
+<div class="hero hero-accueil">
+
+    <h1>
+        <span>Art &</span>
+        <br>Guinguette</h1>
+</div>
+<div ng-controller="AccueilController">
+    <div class="row content" when-visible="animateElementIn" when-not-visible="animateElementOut" data-effect="bounceInLeft">
+        <h1 class="sec01" id="sec01">Art et Guinguette</h1>
+        <p>Musique "live"....Arts de la rue.....Expos....Gastronomie Belge (spécialités de bières et de VRAIES frites).....Miniguinguette
+            pour les enfants.</p>
+        <h1 class="sec02" id="sec02">Contact</h1>
+        <p>
+            <div class="contact">
+                <table>
+                    <tr>
+                        <td>Téléphone</td>
+                        <td>0689734582</td>
+                    </tr>
+                    <tr>
+                        <td>Mail</td>
+                        <td>
+                            <a href="mailto:artsetguinguette@gmail.com">artsetguinguette@gmail.com</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </p>
+       
+    </div>
+    <div class="row content">
+    <h1 class="sec03" id="sec03">Agenda</h1>
+    <p>
+           
+        <div class="evenement">
+
+            <div ng-controller="EvtController">
+                <div ng-show="isShowTitleSection('agendaAnterieur')">{{evtTitleAfter}}</div>
+                <art-evenement asked-agenda="agendaPosterieur" ></art-evenement>
+                <div ng-show="isShowTitleSection('agendaPosterieur')">{{evtTitleBefore}}</div>
+                <art-evenement asked-agenda="agendaAnterieur" asked-title="evtTitleBefore"></art-evenement>
+            </div>
+        </div>
+    </p>
+</div>
+</div>

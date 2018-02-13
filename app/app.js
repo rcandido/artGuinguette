@@ -3,13 +3,14 @@ import './css/menu.scss';
 import './css/animate.scss';
 import './module/accueil.module';
 import './module/info.module';
+import './module/manageInfo.module';
 import './services/dataServices';
 import {photoSlideNumber} from './js/myConst';
 
 import {maRoute} from './services/route';
 
 
-const app = angular.module('main', ['ngRoute', 'accueil','infoModule','dataServices']);
+const app = angular.module('main', ['ngRoute', 'accueil','infoModule','manageInfoModule', 'dataServices']);
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$locationProvider
 		.hashPrefix('');

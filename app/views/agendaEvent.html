@@ -1,0 +1,28 @@
+
+
+	<div ng-repeat="evt in currentAgenda  | limitTo: limit" when-visible="animateElementIn" when-not-visible="animateElementOut"
+	    class="hidden evt  accueil-container not-to-mobile" data-effect='rotateInDownRight' data-effect2='rotateInDownLeft'>
+
+		<h3 class="ng-binding">{{evt.affiche.leMoisHTML}} {{evt.affiche.leNumeroDuJourHTML}} {{evt.info.titre}}</h3>
+		<div class="ng-binding">
+			<a href="{{evt.evtInfo + evt.id +'-'+ evt.id}}">
+				<span ng-bind-html="evt.info.titre"></span>
+				<span ng-bind-html="evt.info.description"></span>
+			</a>
+			<br>
+			<br>
+			<a ng-if="evt.info.evtFacebook" href="{{evt.info.evtFacebook}}" target="_blank">
+				Voir sur facebook
+			</a>
+
+		</div>
+		<div>
+				<br>
+				{{dateToFrench(evt.date)}}
+		</div>
+		<div class="ng-binding">
+			
+			<a target="_blank" href="{{evt.info.adresseGoogle}}">
+				{{evt.info.adresse}}</a>
+		</div>
+	</div>
